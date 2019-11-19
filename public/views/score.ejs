@@ -1,32 +1,49 @@
+
 <html>
+
 <head>
-
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" rel="text/css" href="../resources/css/style.css">
     <title>Check Score</title>
 </head>
 
 <body>
-    <form action="/score" method="POST">
+    <nav>
+        <h1 class="logo"><a href="/">LAB(<span class="color">SE</span>);</a></h1>
         <div>
-        <p>Writing your ID Number</p>
-        <input type="text" name="studentid" placeholder="2018xxxxxx"  required>
-        </div>
-        <input type="submit">
-    </form>
+            <a href="/notice">notice</a>
+            <a href="/members">members</a>
+            <a href="/research">research</a>
+            <a href="#">publications</a>
+            <a href="#">courses</a>
+            <a href="login" class="login">login</a>
 
-    <%if(data){ %>
+        </div>
+    </nav>
+    <div class="score_wrap">
+        <form action="/score" method="POST">
+            <div class="score_info">
+                <div>
+                    <p>Writing your Student ID</p><br>
+                    <input id="score_id" type="text" name="score" placeholder="2018xxxxxx" required>
+                    <input id="score_button" type="submit" value="Enter">
+                </div>
+            </div>
+        </form>
+        <%if(alert){ %>
         <div>
             <span>당신의 점수는 <%=score %>점이며 등수는 <%=rank %>등 입니다.</span>
         </div>
-        <% } %>
+    <% } %>
 
-    <% if(wrongdata) { %>
-        <div>
-            <span>올바른 학번을 다시 입력해주세요.</span>
-        </div>
-        <% } %>
+    </div>
 
-    
 
 </body>
+
+
+
+
+
+
 </html>
