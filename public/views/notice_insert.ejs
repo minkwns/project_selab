@@ -14,15 +14,15 @@
                 <a href="/research">research</a>
                 <a href="#">publications</a>
                 <a href="#">courses</a>
-                <a class="login"><%= user_name %> 님</a> 
+                <a class="login"><%= user_name %> 님</a>
             </div>
         </nav>
         <section class="notice_insert">
-            <form action="/notice_insert" method="post">
+            <form action="/notice_insert" method="post" enctype="multipart/form-data">
                 <input type="text" name="title" placeholder="Title">
                 <textarea name="content" placeholder="Write content"></textarea>
                 <input type="file" name="profile">
-                <input type="submit">
+                <input type="submit" value="Submit">
             </form>    
         </section>     
     </body>

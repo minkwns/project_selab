@@ -39,6 +39,86 @@
     </div>
 
 
+
+    <%if(alert){ %>
+    <div>
+        <span>학번이 잘못 되었습니다.</span>
+    </div>
+    <% } %>
+
+    <% if(results){ %>
+    <div>
+        <button class="score">midterm</button>
+        <button class="score">finalterm</a></button>
+        <button class="score">project</button>
+        <button class="score">attendence</button>
+        <button class="score">total</button>
+
+        <script type="text/javascript">
+            var score_wrap = document.querySelector(".score_wrap");
+            score_wrap.classList.add("none");
+        </script>
+    </div>
+
+    <canvas id="total"></canvas>
+
+    <table class="none">
+        <thead>
+            <tr>
+                <th>midterm/</th>
+                <th>finalterm/</th>
+                <th>project/</th>
+                <th>attendence/</th>
+                <th>total/</th>
+                <th>myscore</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i=0;i<length; i++) { %>
+            <tr>
+                <td class="midterm"><%= midterm[i].midterm %></td>
+                <td class="finalterm"><%= finalterm[i].finalterm %></td>
+                <td class="project"><%= project[i].project %></td>
+                <td class="attendence"><%= attendence[i].attendence %></td>
+                <td class="sum">
+                    <%= midterm[i].midterm +finalterm[i].finalterm+project[i].project+attendence[i].attendence %></td>
+
+            </tr>
+            <%  } %>
+
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>my_midterm/</th>
+                <th>my_finalterm/</th>
+                <th>my_project/</th>
+                <th>my_attendence/</th>
+                <th>my_sum</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td class="my_midterm"><%= results[0].midterm %></td>
+                <td class="my_finalterm"><%= results[0].finalterm %></td>
+                <td class="my_project"><%= results[0].project %></td>
+                <td class="my_attendence"><%= results[0].attendence %></td>
+                <td class="my_sum">
+                    <%= results[0].midterm + results[0].finalterm + results[0].project + results[0].attendence %></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="../resources/js/score.js"></script>
+
+
+
 </body>
 
 

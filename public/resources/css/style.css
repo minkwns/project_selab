@@ -291,8 +291,11 @@ section {
 
 /*---------------------   notice   -------------------------------*/
 .notice {
-    height: 75vh;
     border-top: 2px solid black;
+    background-color: white;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
+    padding : 3%;
+    padding-bottom: 7%;
 }
 
 .notice table {
@@ -301,7 +304,7 @@ section {
 }
 
 .notice tr {
-    border-top: 1px solid rgba(0,0,0,0.5);
+    border-top : 1px solid rgba(0,0,0,0.5);
 }
 
 .notice th {
@@ -322,10 +325,20 @@ section {
     padding-left: 2%; 
 }
 
+.notice tbody td:nth-child(2) a:hover{
+    color: gray;
+}
+
 .notice a button {
-    padding: 7px 10px;
-    border-radius: 30px;
-    float:right;
+    float: right;
+    border: none;
+    width: 10%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #f0e23c;
+    margin-top: 2%;
+    margin-right: 2%;
 }
 
 /*--------------------- notice_insert  -------------------------------*/
@@ -355,31 +368,131 @@ section {
 }
 
 .notice_insert input:last-child{
-    padding: 0.5% 2%;
-    color: yellow;
-    background-color: black; 
+    padding: 0;
+    border: none;
+    width: 10%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #f0e23c;
 }
 
 /*--------------------- notice_id  -------------------------------*/
 .notice_id {
-    height: 75vh;
-    border-top: 2px solid black;
+    background: white;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
+    padding : 3%;
+}
+
+.notice_id h2 {
+    margin: 10px 0 30px 0;
+    margin-left: 3%;
+}
+
+.notice_id > p:nth-child(2) {
+    margin-left: 3%;
+    font-weight: bold;
+}
+
+.notice_id > p:nth-child(2) span{
+    float: right;
+    margin-right: 3%;
+    color : gray;
+}
+
+.notice_id > p:nth-child(3) {
+    clear: right;
+    margin: 0 3%;
+    text-align: justify;
+    margin-top: 30px;
+    min-height: 500px;
+}
+
+.notice_id > div {
+    font-size: 15px;
+    border : 1px solid rgba(0, 0, 0, 0.5);
+    margin: 20px auto;
+    padding: 3%;
+    border-radius: 5px; 
 }
 
 .notice_id h3 {
-    display: inline-block;
+    margin-bottom : 1%;
+}
+
+.notice_id .comment {
+    padding: 1%;
+    border-bottom : 1px solid darkgray;
+    width: 100%;
+    overflow: hidden;
+}
+
+.notice_id .comment p{
+    margin-bottom: 3px;
+    max-width: 95%;
+    word-wrap: break-word;
+}
+
+.notice_id .comment p:first-child{
+    color: lightgray;
+    font-size: 12px;
+}
+
+.notice_id .comment p:first-child:first-line{
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
 }
 
 .notice_id button {
     float: right;
+    border: none;
+    width: 5%;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #f0e23c;
 }
 
-.notice_id .comment {
-    width: 70%;
+.notice_id input[type=text]{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid gray;
 }
 
-.notice_id .reply {
-    
+.notice_id .write_reply{
+    height: 10px;
+    padding: 1%;
+}
+
+.notice_id .write_reply:focus{
+    border-bottom: 1px solid blue;
+}
+
+.notice_id .write_comment {
+    height: 30px;
+    margin-top: 20px;
+}
+
+.notice_id .write_comment:focus{
+    border-bottom: 1px solid blue;
+    padding: 1%;
+}
+
+.notice_id input[type=submit]{
+    color: dodgerblue;
+    margin-top : 10px;
+    font-size: 13px;
+    text-align: center;
+    border: none;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.notice_id input[type=submit]:hover{
+    background: darkgray;
+    color: white;
 }
 /*--------------------- animations -------------------------------*/
 
