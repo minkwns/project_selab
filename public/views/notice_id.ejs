@@ -17,62 +17,65 @@
                 <% if(logined) { %>
                     <a class="login"><%= user_name %> 님</a>
                 <% } else { %>
-                    <a href="login" class="login">login</a>
+                    <a href="/login" class="login">login</a>
                 <% } %>   
             </div>
         </nav>
 
         <section class="notice_id">
-            <% var date = JSON.stringify(results[0].date);
-               date = date.substring(1,11).split("-"); %>
-            <h2><%= results[0].title %></h2>
+             <% var date = JSON.stringify(results1[0].date);
+                date = date.substring(1,11).split("-"); 
+               %> 
+            <h2><%= results1[0].title %></h2>
             <p>
-                <%= results[0].writer_name %>
-                <span><%= `${date[0]}/${date[1]}/${date[2]}` %></span>
+                <%= results1[0].writer_name %>
+                 <span><%= `${date[0]}/${date[1]}/${date[2]}` %></span> 
             </p>
 
             <p>
-                <a href = "/download/<%= results[0].file_name %>"> <%= results[0].file_originalname %>
+                <%= results1[0].content %>
+                <a href = "/download/<%= results1[0].file_name %>"> <%= results1[0].file_originalname %>
             </a>
             </p>
 
             <p>
-                <%= results[0].content %>
+                <%= results1[0].content %>
             </p>
             <div>
-                <form>
+                <form action=<%=`/notice/${notice_id}`%> method="post">
                     <h3>댓글</h3>
-                    <% for(var i=0; i<5; i++){ %>
+                    <%  results2.forEach(function(row){
+                        var date = JSON.stringify(row.date);
+                        date = date.substring(1,11).split("-");
+                    %>
                     <div class="comment">
                         <p>
-                            최준호<br>
-                            2019 11 11
+                            <%=row.writer_name%><br>
+                            <%=`${date[0]}/${date[1]}/${date[2]}`%>
                         </p>
                         <button type="button">답글</button>
-                        <p>asjdnfkjanskdjf</p>
-                        <input type="text" class="none write_reply" >
-                        <input type="submit" value="Submit" class="submit none">
+                        <p><%=row.comment%></p>
+                        <input class="write_reply none" type="text">
+                        <input class="submit none" type="submit" value="Submit">
                     </div>
-                    <% } %>
-                    <input class="write_comment" type="text" placeholder="write a comment">
-                    <input type="submit" value="Submit">
+                    <% }) %>
+                    <input class="write_comment" name="comment" type="text" placeholder="write a comment">
+                    <input class="comment_writing" type="submit" value="Submit">
+
                 </form>
             </div>
 
             <script type="text/javascript">
-
                 var button = document.querySelectorAll("button");
                 var reply = document.getElementsByClassName("write_reply");
                 var submit = document.getElementsByClassName("submit");
                 
-                
-                
-                for(let i=0;i<button.length;i++){
+                for(let i=0;i < button.length;i++){
                     document.querySelectorAll("button")[i].addEventListener("click", function(){
                         reply[i].classList.toggle("none");
-                        submit[i].classList.toggle("none");  
-                    })
-                }         
+                        submit[i].classList.toggle("none");   
+                    });    
+                }
             </script>
         </section>
     </body>

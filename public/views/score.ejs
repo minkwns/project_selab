@@ -51,7 +51,7 @@
         <button class="score">midterm</button>
         <button class="score">finalterm</a></button>
         <button class="score">project</button>
-        <button class="score">attendence</button>
+        <button class="score">attendance</button>
         <button class="score">total</button>
 
         <script type="text/javascript">
@@ -68,7 +68,7 @@
                 <th>midterm/</th>
                 <th>finalterm/</th>
                 <th>project/</th>
-                <th>attendence/</th>
+                <th>attendance/</th>
                 <th>total/</th>
                 <th>myscore</th>
 
@@ -80,9 +80,9 @@
                 <td class="midterm"><%= midterm[i].midterm %></td>
                 <td class="finalterm"><%= finalterm[i].finalterm %></td>
                 <td class="project"><%= project[i].project %></td>
-                <td class="attendence"><%= attendence[i].attendence %></td>
+                <td class="attendance"><%= attendance[i].attendance %></td>
                 <td class="sum">
-                    <%= midterm[i].midterm +finalterm[i].finalterm+project[i].project+attendence[i].attendence %></td>
+                    <%= midterm[i].midterm +finalterm[i].finalterm+project[i].project+attendance[i].attendance %></td>
 
             </tr>
             <%  } %>
@@ -95,7 +95,7 @@
                 <th>my_midterm/</th>
                 <th>my_finalterm/</th>
                 <th>my_project/</th>
-                <th>my_attendence/</th>
+                <th>my_attendance/</th>
                 <th>my_sum</th>
             </tr>
         </thead>
@@ -105,9 +105,9 @@
                 <td class="my_midterm"><%= results[0].midterm %></td>
                 <td class="my_finalterm"><%= results[0].finalterm %></td>
                 <td class="my_project"><%= results[0].project %></td>
-                <td class="my_attendence"><%= results[0].attendence %></td>
+                <td class="my_attendance"><%= results[0].attendance %></td>
                 <td class="my_sum">
-                    <%= results[0].midterm + results[0].finalterm + results[0].project + results[0].attendence %></td>
+                    <%= results[0].midterm + results[0].finalterm + results[0].project + results[0].attendance %></td>
             </tr>
 
         </tbody>

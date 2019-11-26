@@ -4,19 +4,19 @@ var button = document.querySelectorAll('.score');
 var midterm = document.querySelectorAll('.midterm');
 var finalterm = document.querySelectorAll('.finalterm');
 var project = document.querySelectorAll('.project');
-var attendence = document.querySelectorAll('.attendence');
+var attendance = document.querySelectorAll('.attendance');
 var sum = document.querySelectorAll('.sum');
 
 var canvas_total = document.getElementById("total");
 var canvas_midterm = document.getElementById("midterm");
 var canvas_finalterm = document.getElementById("finalterm");
 var canvas_project = document.getElementById("project");
-var canvas_attendence = document.getElementById("attendence");
+var canvas_attendance = document.getElementById("attendance");
 
 var my_midterm = document.querySelectorAll('.my_midterm');
 var my_finalterm = document.querySelectorAll('.my_finalterm');
 var my_project = document.querySelectorAll('.my_project');
-var my_attendence = document.querySelectorAll('.my_attendence');
+var my_attendance = document.querySelectorAll('.my_attendance');
 var my_sum = document.querySelectorAll('.my_sum');
 
 var score_array = new Array(10);
@@ -125,26 +125,25 @@ button[2].addEventListener('click', function(){
 
 button[3].addEventListener('click', function(){
     
-    
     for(let i=0;i<chart.data.datasets[1].data.length;i++){
         chart.data.datasets[1].data[i]=0;
     }
-    var attendence_array = [0,0,0,0,0,0,0,0,0,0,0];
-    for(let i=0;i<attendence.length;i++){
-        var value = attendence[i].innerText;
+    var attendance_array = [0,0,0,0,0,0,0,0,0,0,0];
+    for(let i=0;i<attendance.length;i++){
+        var value = attendance[i].innerText;
         value = value;
-        attendence_array[parseInt(value)]++;
+        attendance_array[parseInt(value)]++;
     }
-    var myscore = my_attendence[0].innerText;
+    var myscore = my_attendance[0].innerText;
     var index = myscore;
     index = parseInt(index);
 
     chart.data.labels = ["0", "1", "2", "3","4","5","6","7","8","9","10"];
-    chart.data.datasets[0].data = attendence_array;
+    chart.data.datasets[0].data = attendance_array;
     var temp = chart.data.datasets[0].data[index];
     chart.data.datasets[0].data[index]=0;
     chart.data.datasets[1].data[index]=temp;
-    chart.data.datasets[0].label = 'attendence score';
+    chart.data.datasets[0].label = 'attendance score';
     chart.update();
 })
 
