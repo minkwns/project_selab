@@ -24,9 +24,6 @@ var multer = require('multer');
 var upload = multer({ dest: 'public/uploads' })
 var mime = require('mime');
 var util = require('util');
-var cookieParser = require('cookie-parser');
-
-app.use(cookieParser())
 //session
 app.use(session({
     secret: 'sid',
@@ -34,7 +31,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: {
         maxAge: 1000 * 60 * 60
-    }
+    },
 }));
 
 <<<<<<< HEAD
@@ -222,10 +219,10 @@ app.get('/notice/:notice_id', function (req, res) {
     var sql2 = 'SELECT * FROM comment WHERE notice_id = ?; ';
 
     connection.query('UPDATE notice SET view = view + 1 WHERE notice_id = ?', [notice_id]);
-    connection.query(sql1 + sql2, [notice_id, notice_id], function(error, results, fields){
+    connection.query(sql1 + sql2, [notice_id, notice_id], function (error, results, fields) {
         results1 = results[0];
         results2 = results[1];
-        if (req.session.user) {    
+        if (req.session.user) {
             res.render('notice_id.ejs', {
                 logined: req.session.user.logined,
                 user_name: req.session.user.user_name,
@@ -272,7 +269,6 @@ app.get('/download/:file_name', function (req, res) {
 
 
     })
-
 });
 
 app.get('/score', function (req, res) {
@@ -307,13 +303,13 @@ app.post('/notice_insert', upload.single('profile'), function (req, res) {
     });
 });
 
-app.post('/notice/:notice_id', function(req, res){
-    if(req.session.user){
+app.post('/notice/:notice_id', function (req, res) {
+    if (req.session.user) {
         var notice_id = req.url.split("/")[2];
         var comment = req.body.comment;
         var writer_name = req.session.user.user_name;
         var sql = `INSERT INTO comment(notice_id, comment, writer_name) VALUES (?,?,?) ;`
-        connection.query(sql, [notice_id, comment, writer_name], function(error, results, fields){
+        connection.query(sql, [notice_id, comment, writer_name], function (error, results, fields) {
             res.redirect(`/notice/${notice_id}`);
         });
     }
@@ -322,7 +318,7 @@ app.post('/notice/:notice_id', function(req, res){
     }
 });
 
-app.post('/', function(req, res){
+app.post('/', function (req, res) {
     var user_id = req.body.user_id;
     var user_password = req.body.user_password;
 
@@ -412,22 +408,41 @@ app.post('/score', function(req, res){
 
 app.post('/score', function (req, res) {
     var studentid = req.body.studentid;
+    var user_name = req.session.user.user_name;
+    connection.query('SELECT studentid FROM user_info WHERE user_name=?', [user_name], function (error, results, fields) {
+        if (results[0].studentid != studentid) {
+            res.render('score.ejs',
+                {
+                    alert: true,
+                    results: false,
+                    user_name: req.session.user.user_name
+                })
+        }
+        else {
+            var sql = 'SELECT * FROM score WHERE studentid = ?; SELECT midterm FROM score; SELECT finalterm FROM score; SELECT project FROM score; SELECT attendance FROM score';
+            connection.query(sql, [studentid], function (error, results, fields) {
+                if (results[0].length > 0) {
 
-    var sql = 'SELECT * FROM score WHERE studentid = ?; SELECT midterm FROM score; SELECT finalterm FROM score; SELECT project FROM score; SELECT attendance FROM score';
-    connection.query(sql, [studentid], function (error, results, fields) {
-        console.log(results[2]);
-        if (results[0].length > 0) {
+                    res.render('score.ejs', {
+                        alert: false,
+                        results: results[0],
+                        midterm: results[1],
+                        finalterm: results[2],
+                        project: results[3],
+                        attendance: results[4],
 
-            res.render('score.ejs', {
-                alert: false,
-                results: results[0],
-                midterm: results[1],
-                finalterm: results[2],
-                project: results[3],
-                attendance: results[4],
+                        length: results[1].length,
+                        user_name: req.session.user.user_name
 
-                length: results[1].length,
-                user_name: req.session.user.user_name
+                    });
+                }
+                else {
+                    res.render('score.ejs', {
+                        alert: true,
+                        results: false,
+                        user_name: req.session.user.user_name
+                    });
+                }
             });
         }
         else {
