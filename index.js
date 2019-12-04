@@ -252,31 +252,29 @@ app.post('/notice/:notice_id', function (req, res) {
         var comment = req.body.comment;
         if (comment == "") {
             var reply = req.body.reply;
-                var index = 0;
-                var reply = req.body.reply;
-                if (typeof (reply) == 'string') {
-                    var sql = 'INSERT INTO comment(notice_id,group_no, comment, writer_name,seq) VALUES(?,?,?,?,?);'
-                    connection.query(sql, [notice_id, index, reply, req.session.user.user_name, 2], function (error, results, fields) {
+            var index = 0;
+            var reply = req.body.reply;
+            if (typeof (reply) == 'string') {
+                var sql = 'INSERT INTO comment(notice_id,group_no, comment, writer_name,seq) VALUES(?,?,?,?,?);'
+                connection.query(sql, [notice_id, index, reply, req.session.user.user_name, 2], function (error, results, fields) {
+                    res.redirect(`/notice/${notice_id}`);
+                })
+            }
+            else {
+                for (let i = 0; i < reply.length; i++) {
+                    if (reply[i] != '') index = i;
+                }
+                var sql_seq = 'select * from comment WHERE group_no = ?';
+                var seq = 0;
+                connection.query(sql_seq, [index], function (error, results, fields) {
+                    seq = index + 1;
+                    var sql = 'INSERT INTO comment(notice_id,group_no, comment, writer_name, seq) VALUES(?,?,?,?,?);'
+                    connection.query(sql, [notice_id, index, reply[index], req.session.user.user_name, seq], function (error, results, fields) {
                         res.redirect(`/notice/${notice_id}`);
                     })
-                }
-                else {
-                    for (let i = 0; i < reply.length; i++) {
-                        if (reply[i] != '') index = i;
-                    }
-                    var sql_seq = 'select * from comment WHERE group_no = ?';
-                    var seq = 0;
-                    connection.query(sql_seq, [index], function (error, results, fields) {
-                        seq = index + 1;
-                        var sql = 'INSERT INTO comment(notice_id,group_no, comment, writer_name, seq) VALUES(?,?,?,?,?);'
-                        connection.query(sql, [notice_id, index, reply[index], req.session.user.user_name, seq], function (error, results, fields) {
-                            res.redirect(`/notice/${notice_id}`);
-                        })
-                    })
+                })
 
-                }
-            
-            
+            }
         }
         else {
             var writer_name = req.session.user.user_name;
@@ -296,7 +294,6 @@ app.post('/notice/:notice_id', function (req, res) {
                         res.redirect(`/notice/${notice_id}`);
                     });
                 }
-
             })
         }
     }
