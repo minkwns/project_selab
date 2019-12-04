@@ -250,20 +250,27 @@ app.post('/notice/:notice_id', function (req, res) {
     if (req.session.user) {
         var notice_id = req.url.split("/")[2];
         var comment = req.body.comment;
+        var writer_name = req.session.user.user_name;
+
+        //대댓글이 달릴때
         if (comment == "") {
             var reply = req.body.reply;
             var index = 0;
-            var reply = req.body.reply;
-            if (typeof (reply) == 'string') {
-                var sql = 'INSERT INTO comment(notice_id,group_no, comment, writer_name,seq) VALUES(?,?,?,?,?);'
-                connection.query(sql, [notice_id, index, reply, req.session.user.user_name, 2], function (error, results, fields) {
-                    res.redirect(`/notice/${notice_id}`);
-                })
+            var reply_notnull = false;
+
+            //대댓글이 처음 달릴때는 스트링으로 전달돼서 객체로 바꿔주는 과정.
+            if (typeof (reply) == 'string' && reply != "") {
+                var obj = JSON.parse(`{"0":${reply}}`);
+                reply = obj;
+                reply_notnull = true;
             }
-            else {
-                for (let i = 0; i < reply.length; i++) {
-                    if (reply[i] != '') index = i;
+            for (let i = 0; i < reply.length; i++) {
+                if (reply[i] != '') {
+                    index = i;
+                    reply_notnull = true;
                 }
+            }
+            if (reply_notnull) {
                 var sql_seq = 'select * from comment WHERE group_no = ?';
                 var seq = 0;
                 connection.query(sql_seq, [index], function (error, results, fields) {
@@ -273,27 +280,22 @@ app.post('/notice/:notice_id', function (req, res) {
                         res.redirect(`/notice/${notice_id}`);
                     })
                 })
-
+            }
+            //대댓글 댓글 아무것도 달리지 않았을때
+            else {
+                res.redirect(`/notice/${notice_id}`);
             }
         }
+
+        //일반 댓글이 달릴때
         else {
-            var writer_name = req.session.user.user_name;
             var sql_seq = 'select * from comment where isnull(group_no) AND notice_id = ?;'
             connection.query(sql_seq, [notice_id], function (error, results, fields) {
-                if (results.length == 0) {
-                    seq = 0;
-                    var sql = `INSERT INTO comment(notice_id, comment, writer_name,seq) VALUES (?,?,?,?) ;`
-                    connection.query(sql, [notice_id, comment, writer_name, seq + 1], function (error, results, fields) {
-                        res.redirect(`/notice/${notice_id}`);
-                    });
-                }
-                else {
-                    seq = results[results.length - 1].seq;
-                    var sql = `INSERT INTO comment(notice_id, comment, writer_name,seq) VALUES (?,?,?,?) ;`
-                    connection.query(sql, [notice_id, comment, writer_name, seq + 1], function (error, results, fields) {
-                        res.redirect(`/notice/${notice_id}`);
-                    });
-                }
+                (results.length == 0 ? seq = 0 : seq = results[results.length - 1].seq);
+                var sql = `INSERT INTO comment(notice_id, comment, writer_name,seq) VALUES (?,?,?,?) ;`
+                connection.query(sql, [notice_id, comment, writer_name, seq + 1], function (error, results, fields) {
+                    res.redirect(`/notice/${notice_id}`);
+                });
             })
         }
     }
@@ -319,7 +321,6 @@ app.post('/', function (req, res) {
                     logined: true,
                     user_name: results[0].user_name
                 }
-
                 res.render('index.ejs', {
                     logined: req.session.user.logined,
                     user_name: req.session.user.user_name
@@ -384,7 +385,6 @@ app.post('/score', function (req, res) {
 
                         length: results[1].length,
                         user_name: req.session.user.user_name
-
                     });
                 }
                 else {
