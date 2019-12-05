@@ -8,7 +8,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var fs = require('fs');
 var multer = require('multer');
-var upload = multer({ dest: 'public/uploads' })
+var upload = multer({
+    dest: 'public/uploads'
+})
 var mime = require('mime');
 var util = require('util');
 //session
@@ -25,7 +27,9 @@ app.set('views', __dirname + '/public/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 
 //localhost:3000
@@ -74,8 +78,7 @@ fs.exists(__dirname + '/public/resources/score.xlsx', function (exists) {
 
             connection.query("INSERT INTO score VALUES(?,?,?,?,?)", [studentid, midterm, finalterm, project, attendance]);
         }
-    }
-    else {
+    } else {
         console.log("no exists");
     }
 });
@@ -87,8 +90,7 @@ app.get('/', function (req, res) {
             logined: req.session.user.logined,
             user_name: req.session.user.user_name
         });
-    }
-    else {
+    } else {
         res.render('index.ejs', {
             logined: false,
             user_name: " "
@@ -97,11 +99,15 @@ app.get('/', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
-    res.render('login.ejs', { data: true });
+    res.render('login.ejs', {
+        data: true
+    });
 });
 
 app.get('/register', function (req, res) {
-    res.render('register.ejs', { alert: false });
+    res.render('register.ejs', {
+        alert: false
+    });
 });
 
 app.get('/members', function (req, res) {
@@ -110,8 +116,7 @@ app.get('/members', function (req, res) {
             logined: req.session.user.logined,
             user_name: req.session.user.user_name
         });
-    }
-    else {
+    } else {
         res.render('members.ejs', {
             logined: false,
             user_name: " "
@@ -125,8 +130,7 @@ app.get('/research', function (req, res) {
             logined: req.session.user.logined,
             user_name: req.session.user.user_name
         });
-    }
-    else {
+    } else {
         res.render('research.ejs', {
             logined: false,
             user_name: " "
@@ -143,8 +147,7 @@ app.get('/notice', function (req, res) {
                 user_name: req.session.user.user_name,
                 results
             });
-        }
-        else {
+        } else {
             res.render('notice.ejs', {
                 logined: false,
                 user_name: " ",
@@ -160,8 +163,7 @@ app.get('/notice_insert', function (req, res) {
             logined: req.session.user.logined,
             user_name: req.session.user.user_name
         });
-    }
-    else {
+    } else {
         res.redirect('/login');
     }
 });
@@ -185,8 +187,7 @@ app.get('/notice/:notice_id', function (req, res) {
                 notice_id,
                 length: length
             });
-        }
-        else {
+        } else {
             res.render('notice_id.ejs', {
                 logined: false,
                 user_name: " ",
@@ -222,8 +223,7 @@ app.get('/score', function (req, res) {
             results: false,
             user_name: req.session.user.user_name
         });
-    }
-    else {
+    } else {
         res.redirect('/login');
     }
 });
@@ -297,8 +297,7 @@ app.post('/notice/:notice_id', function (req, res) {
                 });
             })
         }
-    }
-    else {
+    } else {
         res.render('login.ejs');
     }
 });
@@ -310,7 +309,9 @@ app.post('/', function (req, res) {
     var sql = 'SELECT * FROM user_info WHERE user_id = ?';
     connection.query(sql, [user_id], function (error, results, fields) {
         if (results.length == 0) {
-            res.render('login.ejs', { alert: true });
+            res.render('login.ejs', {
+                alert: true
+            });
         } else {
             var db_pwd = results[0].user_password;
 
@@ -324,9 +325,10 @@ app.post('/', function (req, res) {
                     logined: req.session.user.logined,
                     user_name: req.session.user.user_name
                 });
-            }
-            else {
-                res.render('login.ejs', { alert: true });
+            } else {
+                res.render('login.ejs', {
+                    alert: true
+                });
             }
         }
     });
@@ -341,17 +343,17 @@ app.post('/register', function (req, res) {
 
     if (user_password !== pwdconf) {
         res.redirect('/register');
-    }
-    else {
+    } else {
         var sql = 'SELECT * FROM user_info WHERE user_name = ?';
         connection.query(sql, [user_name], function (error, results, fields) {
             if (results.length == 0) {
                 connection.query("INSERT INTO user_info VALUES(?,?,?,?)", [user_name, studentid, user_id, user_password], function () {
                     res.redirect('/login');
                 });
-            }
-            else {
-                res.render("register.ejs", { alert: true });
+            } else {
+                res.render("register.ejs", {
+                    alert: true
+                });
             }
         });
     }
@@ -362,14 +364,12 @@ app.post('/score', function (req, res) {
     var user_name = req.session.user.user_name;
     connection.query('SELECT studentid FROM user_info WHERE user_name=?', [user_name], function (error, results, fields) {
         if (results[0].studentid != studentid) {
-            res.render('score.ejs',
-                {
-                    alert: true,
-                    results: false,
-                    user_name: req.session.user.user_name
-                })
-        }
-        else {
+            res.render('score.ejs', {
+                alert: true,
+                results: false,
+                user_name: req.session.user.user_name
+            })
+        } else {
             var sql = 'SELECT * FROM score WHERE studentid = ?; SELECT midterm FROM score; SELECT finalterm FROM score; SELECT project FROM score; SELECT attendance FROM score';
             connection.query(sql, [studentid], function (error, results, fields) {
                 if (results[0].length > 0) {
@@ -385,8 +385,7 @@ app.post('/score', function (req, res) {
                         length: results[1].length,
                         user_name: req.session.user.user_name
                     });
-                }
-                else {
+                } else {
                     res.render('score.ejs', {
                         alert: true,
                         results: false,
@@ -396,4 +395,14 @@ app.post('/score', function (req, res) {
             });
         }
     })
+});
+
+
+app.get('/logout', function (req, res) {
+    req.session.destroy();
+    res.clearCookie();
+    console.log('logout complete!');
+    console.log(session);
+    res.redirect('/');
+
 });
