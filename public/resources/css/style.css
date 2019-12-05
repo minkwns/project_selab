@@ -465,6 +465,18 @@ section {
     padding: 1%;
 }
 
+.notice_id .reply{
+    margin-left: 15px;
+    padding-left: 10px;
+
+}
+
+.notice_id .name{
+    margin-right: 10px;
+    margin-left:20px;
+    margin-top:5px;
+}
+
 .notice_id .write_reply:focus{
     border-bottom: 1px solid blue;
 }
