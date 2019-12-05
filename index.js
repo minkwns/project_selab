@@ -257,10 +257,9 @@ app.post('/notice/:notice_id', function (req, res) {
             var reply = req.body.reply;
             var index = 0;
             var reply_notnull = false;
-
             //대댓글이 처음 달릴때는 스트링으로 전달돼서 객체로 바꿔주는 과정.
             if (typeof (reply) == 'string' && reply != "") {
-                var obj = JSON.parse(`{"0":${reply}}`);
+                var obj = JSON.parse(`{"0":"${reply}"}`);
                 reply = obj;
                 reply_notnull = true;
             }
