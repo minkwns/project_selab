@@ -7,19 +7,6 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var fs = require('fs');
-<<<<<<< HEAD
-
-app.set('views', __dirname + '/public/views');
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(__dirname + '/public'));
-
-//localhost:3000
-app.listen(3000, function (){
-    console.log('Example app listening on port 3000!');
-});
-=======
 var multer = require('multer');
 var upload = multer({ dest: 'public/uploads' })
 var mime = require('mime');
@@ -34,9 +21,6 @@ app.use(session({
     },
 }));
 
-<<<<<<< HEAD
-//connect Database
-=======
 app.set('views', __dirname + '/public/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
@@ -51,7 +35,6 @@ app.listen(3000, function () {
 
 var mysql = require('mysql');
 
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
 var connection = mysql.createConnection({
     multipleStatements: true,
     host: 'localhost',
@@ -62,23 +45,15 @@ var connection = mysql.createConnection({
     multipleStatements: true
 });
 
-<<<<<<< HEAD
-connection.connect(function (err){
-    if(err){
-=======
 connection.connect(function (err) {
     if (err) {
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
         console.error('error connecting: ' + err.stack);
         return;
     }
     console.log('Success DB connection');
 });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
 //Excel file
 fs.exists(__dirname + '/public/resources/score.xlsx', function (exists) {
     if (exists) {
@@ -86,13 +61,6 @@ fs.exists(__dirname + '/public/resources/score.xlsx', function (exists) {
         var score_data = XLSX.readFile(__dirname + '/public/resources/score.xlsx');
         var sheet_name_list = score_data.SheetNames;
         var scores = XLSX.utils.sheet_to_json(score_data.Sheets[sheet_name_list[0]]);
-<<<<<<< HEAD
-
-        for (var i = 0; i < scores.length; i++) {
-            var studentid = scores[i]["studentid"];
-            var score = scores[i]["score"];
-            var rank = scores[i]["rank"];
-=======
 
         connection.query("DELETE FROM score");
 
@@ -103,12 +71,9 @@ fs.exists(__dirname + '/public/resources/score.xlsx', function (exists) {
             var project = scores[i]["project"];
             var attendance = scores[i]["attendance"];
 
-            connection.query("INSERT INTO score VALUES(?,?,?)", [studentid, score, rank]);
-        }
 
             connection.query("INSERT INTO score VALUES(?,?,?,?,?)", [studentid, midterm, finalterm, project, attendance]);
         }
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
     }
     else {
         console.log("no exists");
@@ -116,11 +81,7 @@ fs.exists(__dirname + '/public/resources/score.xlsx', function (exists) {
 });
 
 // get html(rendering)
-<<<<<<< HEAD
-app.get('/', function (req, res){
-=======
 app.get('/', function (req, res) {
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
     if (req.session.user) {
         res.render('index.ejs', {
             logined: req.session.user.logined,
@@ -143,11 +104,7 @@ app.get('/register', function (req, res) {
     res.render('register.ejs', { alert: false });
 });
 
-<<<<<<< HEAD
-app.get('/members', function(req, res){
-=======
 app.get('/members', function (req, res) {
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
     if (req.session.user) {
         res.render('members.ejs', {
             logined: req.session.user.logined,
@@ -162,11 +119,7 @@ app.get('/members', function (req, res) {
     }
 });
 
-<<<<<<< HEAD
-app.get('/research', function(req, res){
-=======
 app.get('/research', function (req, res) {
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
     if (req.session.user) {
         res.render('research.ejs', {
             logined: req.session.user.logined,
@@ -243,17 +196,6 @@ app.get('/notice/:notice_id', function (req, res) {
     })
 });
 
-<<<<<<< HEAD
-app.get('/score', function(req, res){
-    if(req.session.user){
-        res.render('score.ejs', {
-            alert : false,
-            rank : null,
-            score : null
-        });
-    }
-    else{
-=======
 
 app.get('/download/:file_name', function (req, res) {
     var file_name = req.params.file_name;
@@ -280,17 +222,12 @@ app.get('/score', function (req, res) {
         });
     }
     else {
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
         res.redirect('/login');
     }
 });
 
 // post html
-<<<<<<< HEAD
-app.post('/notice_insert', function(req, res){
-=======
 app.post('/notice_insert', upload.single('profile'), function (req, res) {
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
     var title = req.body.title;
     var content = req.body.content;
     var writer_name = req.session.user.user_name;
@@ -354,13 +291,8 @@ app.post('/register', function (req, res) {
     var user_id = req.body.user_id;
     var user_password = req.body.user_password;
     var pwdconf = req.body.pwdconf;
-<<<<<<< HEAD
-    
-    if(user_password !== pwdconf){
-=======
 
     if (user_password !== pwdconf) {
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
         res.redirect('/register');
     }
     else {
@@ -374,34 +306,6 @@ app.post('/register', function (req, res) {
             else {
                 res.render("register.ejs", { alert: true });
             }
-<<<<<<< HEAD
-        }); 
-    }
-});
-
-app.post('/score', function(req, res){
-    var studentid = req.body.studentid;
-    var sql = 'SELECT * FROM score WHERE studentid = ?';
-    connection.query(sql, [studentid], function(error, results, fields){
-            if(results.length > 0){
-                console.log(results);
-                score = results[0].score;
-                rank = results[0].rank;
-                res.render('score.ejs', {
-                    alert : true,
-                    score,
-                    rank
-                });
-            }
-            else{
-                res.render('score.ejs', {
-                    alert : false,
-                    score,
-                    rank
-                });
-            }
-        
-=======
         });
     }
 });
@@ -445,13 +349,5 @@ app.post('/score', function (req, res) {
                 }
             });
         }
-        else {
-            res.render('score.ejs', {
-                alert: true,
-                results: false,
-                user_name: req.session.user.user_name
-            });
-        }
->>>>>>> 4a15bb01ba0da4f720dbe9ece71d44e546debd18
-    });
+    })
 });
