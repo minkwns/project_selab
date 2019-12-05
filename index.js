@@ -402,7 +402,6 @@ app.get('/logout', function (req, res) {
     req.session.destroy();
     res.clearCookie();
     console.log('logout complete!');
-    console.log(session);
     res.redirect('/');
 
 });
