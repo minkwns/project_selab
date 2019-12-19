@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" rel="text/css" href="../resources/css/style.css">
+</html>
+
+<body>
+    <nav>
+        <h1 class="logo"><a href="/">LAB(<span class="color">SE</span>);</a></h1>
+        <div>
+            <a href="/notice">notice</a>
+            <a href="/members">members</a>
+            <a href="/research">research</a>
+            <a href="#">publications</a>
+            <a href="/courses">courses</a>
+            <a href="/score">score</a>
+            <% if(logined) { %>
+            <a class="login"><%= user_name %> 님</a>
+            <% } else { %>
+            <a href="login" class="login">login</a>
+            <% } %>
+        </div>
+    </nav>
+    <section id="courses">
+        <h2>COURSES</h2>
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        Undergraduate Courses
+                    </tr>
+                    <tr>
+                        <td>CSE107</td>
+                        <td>Logical Fundamentals of Programming</td>
+                    </tr>
+                    <tr>
+                        <td>CSE117</td>
+                        <td>Programming Fundamentals</td>
+                    </tr>
+                    <tr>
+                        <td>CSE322</td>
+                        <td>Web Programming</td>
+                    </tr>
+                    <tr>
+                        <td>CSE326</td>
+                        <td>Web Application Development</td>
+                    </tr>
+                    <tr>
+                        <td>CSE406</td>
+                        <td>Software Engineering</td>
+                    </tr>
+                </tbody>
+            </table>        
+            <table>
+                <thead>
+                    <tr>
+                        2019-2
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        2019-1
+                    </tr>
+                    <tr>
+                        2018-1
+                    </tr>
+                    <tr>
+                        2017-2
+                    </tr>
+                    <tr>
+                        2017-1 
+                    </tr>
+                    <tr>
+                        2016-2  
+                    </tr>
+                    <tr>
+                        2016-1  
+                    </tr>
+                    <tr>
+                        2015-2  
+                    </tr>
+                    <tr>
+                        2015-1  
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
