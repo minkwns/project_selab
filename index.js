@@ -184,7 +184,8 @@ app.get('/notice/:notice_id', function (req, res) {
                 user_name: " ",
                 results1,
                 results2,
-                notice_id
+                notice_id,
+                length: length
             });
         }
     })

@@ -3,9 +3,8 @@
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <link rel="stylesheet" rel="text/css" href="../resources/css/style.css">
-    <script src="../resources/js/headerText.js"></script>
+
 </head>
 
 <body>
@@ -17,7 +16,6 @@
             <a href="/research">research</a>
             <a href="/publications">publications</a>
             <a href="/courses">courses</a>
-            <a href="/score">score</a>
             <% if(logined) { %>
             <a class="login"><%= user_name %> 님</a>
             <% } else { %>
@@ -25,22 +23,6 @@
             <% } %>
         </div>
     </nav>
-    <div class="dropdown none">
-        <ul>
-            <li><%=user_name%></li>
-            <li><%=user_email%></li>
-            <li><a href="/logout">Logout</a></li>
-            <li><a href="/score">Score</a></li>
-        </ul>
-    </div>
-
-    <script type="text/javascript">
-        var login = document.querySelectorAll('.login')[0];
-        var dropdown = document.querySelectorAll('.dropdown')[0];
-        login.addEventListener('click', function(){
-            dropdown.classList.toggle("none");
-        })
-    </script>
 
     <header>
         <div class="background">
@@ -68,6 +50,14 @@
             </div>
         </div>
     </header>
+    <% if(logined) { %>
+        <div class="dropdown none">
+            <ul>
+                <li><a href="/score">Score</a></li>
+                <li><a href="/logout" class="logout">Logout</a></li>
+            </ul>
+        </div>
+    <% } %>
     <footer>
         <div class="row">
             <div>Wi Jun Bum, Bae Jin Woo, Park Jae Sun, Park Sung Su, Choi Jun Ho</div>

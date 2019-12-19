@@ -12,16 +12,23 @@
                 <a href="/notice">notice</a>
                 <a href="/members">members</a>
                 <a href="/research">research</a>
-                <a href="#">publications</a>
-                <a href="#">courses</a>
+                <a href="/publications">publications</a>
+                <a href="/courses">courses</a>
                 <% if(logined) { %>
                     <a class="login"><%= user_name %> 님</a>
-                    <a href="/logout">logout</a>
                 <% } else { %>
                     <a href="login" class="login">login</a>
                 <% } %>   
             </div>
         </nav>
+        <% if(logined) { %>
+            <div class="dropdown none">
+                <ul>
+                    <li><a href="/score">Score</a></li>
+                    <li><a href="/logout" class="logout">Logout</a></li>
+                </ul>
+            </div>
+        <% } %>
         <section>
             <article class="member">
                 <h3>Professor</h3>
@@ -188,4 +195,5 @@
             </div>
         </footer>
     </body>
+    <script type="text/javascript" src="../resources/js/headerText.js"></script>
 </html>
