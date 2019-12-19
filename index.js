@@ -88,12 +88,15 @@ app.get('/', function (req, res) {
     if (req.session.user) {
         res.render('index.ejs', {
             logined: req.session.user.logined,
-            user_name: req.session.user.user_name
+            user_name: req.session.user.user_name,
+            user_email: req.session.user.user_email
         });
     } else {
         res.render('index.ejs', {
             logined: false,
-            user_name: " "
+            user_name: " ",
+            user_email:" "
+            
         });
     }
 });
@@ -211,8 +214,6 @@ app.get('/download/:file_name', function (req, res) {
         res.setHeader('Content-type', mimetype);
         var filestream = fs.createReadStream(file);
         filestream.pipe(res);
-
-
     })
 });
 
@@ -333,11 +334,13 @@ app.post('/', function (req, res) {
                 //session
                 req.session.user = {
                     logined: true,
-                    user_name: results[0].user_name
+                    user_name: results[0].user_name,
+                    user_email: results[0].user_id
                 }
                 res.render('index.ejs', {
                     logined: req.session.user.logined,
-                    user_name: req.session.user.user_name
+                    user_name: req.session.user.user_name,
+                    user_email: req.session.user.user_email
                 });
             } else {
                 res.render('login.ejs', {
