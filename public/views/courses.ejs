@@ -23,93 +23,310 @@
             <% } %>
         </div>
     </nav>
-    <section id="courses" >
-        <h2>COURSES</h2>
-        <% if(studentid =="1111111111") { %>
-       
-        <div >
-            <form action="/courses" method="post" enctype="multipart/form-data">
-                <select  name= "courses">
-                <option value = "" selected> -- 선택 --</option>
-                <option value ="CSE107">CSE107</option>
-                <option value ="CSE117">CSE117</option>
-                <option value ="CSE322">CSE322</option>
-                <option value ="CSE326">CSE326</option>
-                <option value ="CSE406">CSE406</option>
-                <option value ="CSE870">CSE870</option>
-                <option value ="CSE603">CSE603</option>
-                <option value ="CSE609">CSE609</option>
-                <option value ="CSE639">CSE639</option>
-                <option value ="CSE6050">CSE6050</option>
-                </select>
-                <input type="file" name="profile">
-                <input type="submit" value="Submit">
-
-            </form>
-        </div>
-        <% } %>
-
+    <section id="courses">
+        <h3>COURSES</h3>
+        <hr>
         <div>
-            <table>
+            <table class="course_left">
                 <tbody>
                     <tr>
-                        Undergraduate Courses
+                        <th class="coursename" colspan="2">Undergraduate Courses</th>
                     </tr>
-                    <tr>
+                    <tr class="courseli">
                         <td>CSE107</td>
                         <td>Logical Fundamentals of Programming</td>
                     </tr>
-                    <tr>
+                    <tr class="courseli">
                         <td>CSE117</td>
                         <td>Programming Fundamentals</td>
                     </tr>
-                    <tr>
+                    <tr class="courseli">
                         <td>CSE322</td>
                         <td>Web Programming</td>
                     </tr>
-                    <tr>
+                    <tr class="courseli">
                         <td>CSE326</td>
                         <td>Web Application Development</td>
                     </tr>
-                    <tr>
+                    <tr class="courseli">
                         <td>CSE406</td>
                         <td>Software Engineering</td>
                     </tr>
                 </tbody>
             </table>
-            <table>
-                <thead>
-                    <tr>
-                        2019-2
-                    </tr>
-                </thead>
+            <div class="overflow">
+                <table class="course_right">
+                    <tbody>
+                        <tr>
+                            <th>2019-2</th>
+                            <th>2019-1</th>
+                            <th>2018-1</th>
+                            <th>2017-2</th>
+                            <th>2017-1</th>
+                            <th>2016-2</th>
+                            <th>2016-1</th>
+                            <th>2015-2</th>
+                            <th>2015-1</th>
+                            <th>2014-2</th>
+                            <th>2014-1</th>
+                            <th>2013-2</th>
+                            <th>2013-1</th>
+                            <th>2012-2</th>
+                            <th>2012-1</th>
+                            <th>2011-2</th>
+                            <th>2011-1</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <table class="course_left">
                 <tbody>
                     <tr>
-                        2019-1
+                        <th class="coursename" colspan="2">Postgraduate Courses</th>
                     </tr>
-                    <tr>
-                        2018-1
+                    <tr class="courseli">
+                        <td>CIN870</td>
+                        <td>Formal Methods</td>
                     </tr>
-                    <tr>
-                        2017-2
+                    <tr class="courseli">
+                        <td>CSE603</td>
+                        <td>Management of Semistructured Data</td>
                     </tr>
-                    <tr>
-                        2017-1
+                    <tr class="courseli">
+                        <td>CSE609</td>
+                        <td>Model Checking</td>
                     </tr>
-                    <tr>
-                        2016-2
+                    <tr class="courseli">
+                        <td>CSE639</td>
+                        <td>Special Topics in Software Engineering</td>
                     </tr>
-                    <tr>
-                        2016-1
-                    </tr>
-                    <tr>
-                        2015-2
-                    </tr>
-                    <tr>
-                        2015-1
+                    <tr class="courseli">
+                        <td>CSE6050</td>
+                        <td>Advanced Software Engineering</td>
                     </tr>
                 </tbody>
             </table>
+            <div class="overflow">
+                <table class="course_right">
+                    <tbody>
+                        <tr>
+                            <th>2019-2</th>
+                            <th>2019-1</th>
+                            <th>2018-1</th>
+                            <th>2017-2</th>
+                            <th>2017-1</th>
+                            <th>2016-2</th>
+                            <th>2016-1</th>
+                            <th>2015-2</th>
+                            <th>2015-1</th>
+                            <th>2014-2</th>
+                            <th>2014-1</th>
+                            <th>2013-2</th>
+                            <th>2013-1</th>
+                            <th>2012-2</th>
+                            <th>2012-1</th>
+                            <th>2011-2</th>
+                            <th>2011-1</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 </body>
