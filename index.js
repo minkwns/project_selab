@@ -11,6 +11,15 @@ var multer = require('multer');
 var upload = multer({
     dest: 'public/uploads'
 })
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname) // cb 콜백함수를 통해 전송된 파일 이름 설정
+    }
+})
+var upload = multer({ storage: storage })
 var mime = require('mime');
 var util = require('util');
 //session
@@ -59,32 +68,11 @@ connection.connect(function (err) {
 
 
 //Excel file
-fs.exists(__dirname + '/public/resources/score.xlsx', function (exists) {
-    if (exists) {
-        console.log("exists");
-        var score_data = XLSX.readFile(__dirname + '/public/resources/score.xlsx');
-        var sheet_name_list = score_data.SheetNames;
-        var scores = XLSX.utils.sheet_to_json(score_data.Sheets[sheet_name_list[0]]);
 
-        connection.query("DELETE FROM score");
-
-        for (var i = 0; i < scores.length; i++) {
-            var studentid = scores[i]["studentid"];
-            var midterm = scores[i]["midterm"];
-            var finalterm = scores[i]["finalterm"];
-            var project = scores[i]["project"];
-            var attendance = scores[i]["attendance"];
-
-
-            connection.query("INSERT INTO score VALUES(?,?,?,?,?)", [studentid, midterm, finalterm, project, attendance]);
-        }
-    } else {
-        console.log("no exists");
-    }
-});
 
 // get html(rendering)
 app.get('/', function (req, res) {
+
     if (req.session.user) {
         res.render('index.ejs', {
             logined: req.session.user.logined,
@@ -228,16 +216,18 @@ app.get('/score', function (req, res) {
     }
 });
 
-app.get('/courses',function(req, res){
+app.get('/courses', function (req, res) {
     if (req.session.user) {
         res.render('courses.ejs', {
             logined: req.session.user.logined,
-            user_name: req.session.user.user_name
+            user_name: req.session.user.user_name,
+            studentid: req.session.user.studentid
         });
     } else {
         res.render('courses.ejs', {
             logined: false,
-            user_name: " "
+            user_name: " ",
+            studentid: " "
         });
     }
 })
@@ -251,7 +241,7 @@ app.post('/notice_insert', upload.single('profile'), function (req, res) {
     var file_name = null;
     var file_originalname = null;
     if (file != null) {
-        file_name = file.name;
+        file_name = file.filename;
         file_originalname = file.originalname;
     }
     var sql = 'INSERT INTO notice(title, content, writer_name,file_originalname,file_name) VALUES (?,?,?,?,?)';
@@ -333,11 +323,13 @@ app.post('/', function (req, res) {
                 //session
                 req.session.user = {
                     logined: true,
-                    user_name: results[0].user_name
+                    user_name: results[0].user_name,
+                    studentid: results[0].studentid
                 }
                 res.render('index.ejs', {
                     logined: req.session.user.logined,
-                    user_name: req.session.user.user_name
+                    user_name: req.session.user.user_name,
+                    studentid: req.session.user.studentid
                 });
             } else {
                 res.render('login.ejs', {
@@ -410,6 +402,48 @@ app.post('/score', function (req, res) {
         }
     })
 });
+
+app.post('/courses', upload.single('profile'), function (req, res) {
+    var courses = req.body.courses;
+    var file = req.file;
+
+    var file_name = null;
+    if (file != null) {
+        file_name = file.filename;
+
+        var sql1 = 'select course from course_score';
+        connection.query(sql1, function (error, results, fields) {
+            for (let i = 0; i < results.length; i++) {
+                if (results[i].course == courses) {
+                    connection.query('delete from course_score where course = ?;', [courses]);
+                }
+            };
+            var score = 'score'.concat("_", courses)
+            connection.query('INSERT INTO course_score VALUES (?,?)', [courses, file_name]);
+            var sqlcre = 'create table if not exists '.concat(score, '(studentid int(10) not null primary key,midterm int(10),finalterm int(10),project int(10),attendance int(10))')
+            connection.query(sqlcre, [score], function (error, resultscre, fields) { });
+            console.log("exists");
+            var score_data = XLSX.readFile(__dirname + '/public/uploads/' + file_name);
+            var sheet_name_list = score_data.SheetNames;
+            var scores = XLSX.utils.sheet_to_json(score_data.Sheets[sheet_name_list[0]]);
+
+            connection.query("delete from ".concat(score, ""));
+
+
+            for (var i = 0; i < scores.length; i++) {
+                var studentid = scores[i]["studentid"];
+                var midterm = scores[i]["midterm"];
+                var finalterm = scores[i]["finalterm"];
+                var project = scores[i]["project"];
+                var attendance = scores[i]["attendance"];
+
+                connection.query("INSERT INTO ".concat(score, " VALUES(?,?,?,?,?)"), [studentid, midterm, finalterm, project, attendance]);
+            }
+        });
+    }
+    res.redirect('/courses');
+});
+
 
 
 app.get('/logout', function (req, res) {

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    <link rel="stylesheet" rel="text/css" href="../resources/css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+<link rel="stylesheet" rel="text/css" href="../resources/css/style.css">
+
 </html>
 
 <body>
@@ -22,8 +23,32 @@
             <% } %>
         </div>
     </nav>
-    <section id="courses">
+    <section id="courses" >
         <h2>COURSES</h2>
+        <% if(studentid =="1111111111") { %>
+       
+        <div >
+            <form action="/courses" method="post" enctype="multipart/form-data">
+                <select  name= "courses">
+                <option value = "" selected> -- 선택 --</option>
+                <option value ="CSE107">CSE107</option>
+                <option value ="CSE117">CSE117</option>
+                <option value ="CSE322">CSE322</option>
+                <option value ="CSE326">CSE326</option>
+                <option value ="CSE406">CSE406</option>
+                <option value ="CSE870">CSE870</option>
+                <option value ="CSE603">CSE603</option>
+                <option value ="CSE609">CSE609</option>
+                <option value ="CSE639">CSE639</option>
+                <option value ="CSE6050">CSE6050</option>
+                </select>
+                <input type="file" name="profile">
+                <input type="submit" value="Submit">
+
+            </form>
+        </div>
+        <% } %>
+
         <div>
             <table>
                 <tbody>
@@ -51,7 +76,7 @@
                         <td>Software Engineering</td>
                     </tr>
                 </tbody>
-            </table>        
+            </table>
             <table>
                 <thead>
                     <tr>
@@ -69,19 +94,19 @@
                         2017-2
                     </tr>
                     <tr>
-                        2017-1 
+                        2017-1
                     </tr>
                     <tr>
-                        2016-2  
+                        2016-2
                     </tr>
                     <tr>
-                        2016-1  
+                        2016-1
                     </tr>
                     <tr>
-                        2015-2  
+                        2015-2
                     </tr>
                     <tr>
-                        2015-1  
+                        2015-1
                     </tr>
                 </tbody>
             </table>
