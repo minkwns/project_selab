@@ -14,33 +14,40 @@
             <a href="/notice">notice</a>
             <a href="/members">members</a>
             <a href="/research">research</a>
-            <a href="#">publications</a>
-            <a href="#">courses</a>
+            <a href="/publications">publications</a>
+            <a href="/courses">courses</a>
             <% if(logined) { %>
             <a class="login"><%= user_name %> 님</a>
-            <a href="/logout">logout</a>
             <% } else { %>
             <a href="/login" class="login">login</a>
             <% } %>
         </div>
     </nav>
 
+    <% if(logined) { %>
+        <div class="dropdown none">
+            <ul>
+                <li><a href="/score">Score</a></li>
+                <li><a href="/logout" class="logout">Logout</a></li>
+            </ul>
+        </div>
+    <% } %>
+    
     <section class="notice_id">
         <% var date = JSON.stringify(results1[0].date);
                 date = date.substring(1,11).split("-"); 
                %>
         <h2><%= results1[0].title %></h2>
         <p>
-            <%= results1[0].writer_name %>
+            <span><%= results1[0].writer_name %></span>
             <span><%= `${date[0]}/${date[1]}/${date[2]}` %></span>
         </p>
-
-        <p>
+        <% if(results1[0].file_originalname) { %>
+        <a class="file" href="/download/<%= results1[0].file_name %>">file : <%= results1[0].file_originalname %></a>
+        <% } %>
+        <p class="notice_content">
             <%= results1[0].content %>
-            <a href="/download/<%= results1[0].file_name %>"> <%= results1[0].file_originalname %>
-            </a>
         </p>
-
         <div>
             <form action=<%=`/notice/${notice_id}`%> method="post">
                 <h3>댓글</h3>
@@ -48,23 +55,23 @@
                         var date = JSON.stringify(results2[i].date);
                         date = date.substring(1,11).split("-");
                         if(results2[i].group_no != null){%>
-                            <span class="name"><strong><%=results2[i].writer_name%></strong>
-                            <%=`${date[0]}/${date[1]}/${date[2]}`%></span>
-                            <p class="reply"><%=results2[i].comment%></p><br>
-                         <%} else {%>
-                            <div class="comment">
-                            <p>
-                                <%=results2[i].writer_name%><br>
-                                <%=`${date[0]}/${date[1]}/${date[2]}`%>
-                            </p>
-                            <button type="button">답글</button>
-                            <p><%=results2[i].comment%></p>
-                            <div class>
-                                <input class="write_reply none" type="text" name="reply">
-                                <input class="submit none" type="submit" value="Submit">
-                            </div>
-                        </div>
-                    <%}} %>
+                <div class="comment_reply">
+                    <span class="com_name"><%=results2[i].writer_name%></span>
+                    <span class="com_time"><%=`${date[0]}/${date[1]}/${date[2]}`%></span>
+                    <p><%=results2[i].comment%></p><br>
+                </div>
+                <%} else {%>
+                <div class="comment">
+                    <span class="com_name"><%=results2[i].writer_name%></span>
+                    <span class="com_time"><%=`${date[0]}/${date[1]}/${date[2]}`%></span>
+                    <button type="button">답글</button>
+                    <p><%=results2[i].comment%></p>
+                    <div>
+                        <input class="write_reply none" type="text" name="reply">
+                        <input class="submit none" type="submit" value="Submit">
+                    </div>
+                </div>
+                <%}} %>
                 <input class="write_comment" name="comment" type="text" placeholder="write a comment">
                 <input class="comment_writing" type="submit" value="Submit">
             </form>
@@ -83,5 +90,6 @@
         </script>
     </section>
 </body>
+<script type="text/javascript" src="../resources/js/headerText.js"></script>
 
 </html>
