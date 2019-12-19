@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+        <link rel="stylesheet" rel="text/css" href="../resources/css/style.css">
+    </head>
+    <body>
+        <nav>
+            <h1 class="logo"><a href="/">LAB(<span class="color">SE</span>);</a></h1>
+            <div>
+                <a href="/notice">notice</a>
+                <a href="/members">members</a>
+                <a href="/research">research</a>
+                <a href="/publications">publications</a>
+                <a href="/courses">courses</a>
+                <% if(logined) { %>
+                    <a class="login"><%= user_name %> 님</a>
+                <% } else { %>
+                    <a href="login" class="login">login</a>
+                <% } %>   
+            </div>
+        </nav>
+        <% if(logined) { %>
+            <div class="dropdown none">
+                <ul>
+                    <li><a href="/score">Score</a></li>
+                    <li><a href="/logout" class="logout">Logout</a></li>
+                </ul>
+            </div>
+        <% } %>
+        
+        <section id="publications"> 
+            <h3>Publications</h3>
+            <hr>
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>International Conference</th>
+                        </tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr>
+                            <th>International Journal</th>
+                        </tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr>
+                            <th>Domestic Conference</th>
+                        </tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr>
+                            <th>Domestic Journal</th>
+                        </tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                        <tr><td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled </td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <footer>
+            <div class="row">
+                <div>Wi Jun Bum, Bae Jin Woo, Park Jae Sun, Park Sung Su, Choi Jun Ho</div>
+                <div>@Copyright Hanyang University</div>
+                <div>SeLab Web Application Class</div>
+            </div>
+        </footer>
+    </body>
+    <script type="text/javascript" src="../resources/js/headerText.js"></script>
+</html>
