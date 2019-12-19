@@ -338,13 +338,13 @@ app.post('/', function (req, res) {
                 req.session.user = {
                     logined: true,
                     user_name: results[0].user_name,
-                    user_email: results[0].user_id
+                    user_email: results[0].user_id,
                     studentid: results[0].studentid
                 }
                 res.render('index.ejs', {
                     logined: req.session.user.logined,
                     user_name: req.session.user.user_name,
-                    user_email: req.session.user.user_email
+                    user_email: req.session.user.user_email,
                     studentid: req.session.user.studentid
                 });
             } else {
