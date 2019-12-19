@@ -385,6 +385,8 @@ app.post('/register', function (req, res) {
 app.post('/score', function (req, res) {
     var studentid = req.body.studentid;
     var user_name = req.session.user.user_name;
+    var course = req.body.course;
+    var score = 'score'.concat("_", course)
     connection.query('SELECT studentid FROM user_info WHERE user_name=?', [user_name], function (error, results, fields) {
         if (results[0].studentid != studentid) {
             res.render('score.ejs', {
@@ -393,8 +395,7 @@ app.post('/score', function (req, res) {
                 user_name: req.session.user.user_name
             })
         } else {
-            var sql = 'SELECT * FROM score WHERE studentid = ?; SELECT midterm FROM score; SELECT finalterm FROM score; SELECT project FROM score; SELECT attendance FROM score';
-            connection.query(sql, [studentid], function (error, results, fields) {
+            var sql = 'SELECT * FROM '.concat(score ,' WHERE studentid = ?; SELECT midterm FROM '.concat(score,' ; SELECT finalterm FROM '.concat(score+' ; SELECT project FROM '.concat(score +' ; SELECT attendance FROM '.concat(score,"" )))));            connection.query(sql, [studentid], function (error, results, fields) {
                 if (results[0].length > 0) {
 
                     res.render('score.ejs', {
