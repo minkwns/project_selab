@@ -25,6 +25,29 @@
     </nav>
     <section id="courses">
         <h3>COURSES</h3>
+        <% if(studentid =="1111111111") { %>
+       
+            <div >
+                <form action="/courses" method="post" enctype="multipart/form-data">
+                    <select  name= "courses">
+                    <option value = "" selected> -- 선택 --</option>
+                    <option value ="CSE107">CSE107</option>
+                    <option value ="CSE117">CSE117</option>
+                    <option value ="CSE322">CSE322</option>
+                    <option value ="CSE326">CSE326</option>
+                    <option value ="CSE406">CSE406</option>
+                    <option value ="CSE870">CSE870</option>
+                    <option value ="CSE603">CSE603</option>
+                    <option value ="CSE609">CSE609</option>
+                    <option value ="CSE639">CSE639</option>
+                    <option value ="CSE6050">CSE6050</option>
+                    </select>
+                    <input type="file" name="profile">
+                    <input type="submit" value="Submit">
+    
+                </form>
+            </div>
+            <% } %>
         <hr>
         <div>
             <table class="course_left">
