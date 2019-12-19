@@ -202,6 +202,19 @@ app.get('/notice/:notice_id', function (req, res) {
     })
 });
 
+app.get('/publications',function(req, res){
+    if (req.session.user) {
+        res.render('publications.ejs', {
+            logined: req.session.user.logined,
+            user_name: req.session.user.user_name
+        });
+    } else {
+        res.render('publications.ejs', {
+            logined: false,
+            user_name: " "
+        });
+    }
+})
 
 app.get('/download/:file_name', function (req, res) {
     var file_name = req.params.file_name;

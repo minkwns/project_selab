@@ -549,5 +549,108 @@ section {
 }
 
 .dropdown {
-    width: 50px;
+    font-family: 'Open+sans';
+    font-size: 20px;
+    border: 2px solid #000000;
+    border-radius: 5%;
+    background: #ffffff;
+    width: 300px;
+    height: 400px;
+    float: right;
+}
+
+/*----------------------courses -------------------------------*/
+#courses {
+    background: white;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
+    padding : 3%;
+}
+
+#courses h3{
+    font-size: 50px;
+}
+#courses > div{
+    margin-top: 30px;
+}
+
+
+#courses table,
+#courses th,
+#courses tr,
+#courses td {
+    border-collapse: collapse;
+    border : 1px solid black;
+}
+
+#courses .course_left {
+    float : left;
+    width: 45%;
+}
+
+#courses .course_left th,
+#courses .course_right th {
+    height: 50px;
+}
+
+#courses .course_right th {
+    min-width: 77px;    
+}
+
+#courses .overflow{
+    overflow: auto;
+}
+
+#courses .course_left td,
+#courses .course_right td{
+    height: 30px;
+    padding: 7px;
+}
+
+#courses .course_right {
+    min-width: 55%;
+}
+
+/*---------------------- publications -------------------------------*/
+#publications {
+    background: white;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
+    padding : 3%;
+}
+
+#publications h3 {
+    font-size : 50px;
+}
+
+#publications > div{
+    margin-top: 30px;
+}
+
+#publications table {
+    width: 100%; 
+    border-collapse: separate;
+}
+
+#publications th{
+    border-spacing: 20px;
+    border: 1px solid white;   
+    text-align: left;  
+    padding: 5px 10px;
+    background: #e9e9e9;
+    line-height: 40px;
+    border-radius: 5px;
+}
+
+#publications .pubname {
+    margin-top: 30px;
+}
+
+#publications td {
+    box-sizing: border-box;
+    padding: 1%;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+#publications td:hover {
+    background: #e9e9e9;
+    border-radius: 5px;
 }
