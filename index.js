@@ -228,6 +228,20 @@ app.get('/score', function (req, res) {
     }
 });
 
+app.get('/courses',function(req, res){
+    if (req.session.user) {
+        res.render('courses.ejs', {
+            logined: req.session.user.logined,
+            user_name: req.session.user.user_name
+        });
+    } else {
+        res.render('courses.ejs', {
+            logined: false,
+            user_name: " "
+        });
+    }
+})
+
 // post html
 app.post('/notice_insert', upload.single('profile'), function (req, res) {
     var title = req.body.title;
