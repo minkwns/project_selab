@@ -32,17 +32,12 @@
         <div class="id_wrap">
             <form action="/score" method="POST">
                 <div class="score_info">
-                        <p> choose your course</p><br>
-                        <label><input type="radio" name="course" value ="CSE107" checked />CSE107</label>
-                        <label><input type="radio" name="course" value ="CSE117">CSE117</label>
-                        <label><input type="radio" name="course" value ="CSE322">CSE322</label>
-                        <label><input type="radio" name="course" value ="CSE326">CSE326</option></label>
-                        <label><input type="radio" name="course" value ="CSE406">CSE406</label>
-                        <label><input type="radio" name="course" value ="CSE870">CSE870</label>
-                        <label><input type="radio" name="course" value ="CSE603">CSE603</label>
-                        <label><input type="radio" name="course" value ="CSE609">CSE609</label>
-                        <label><input type="radio" name="course" value ="CSE639">CSE639</label>
-                        <label><input type="radio" name="course" value ="CSE6050">CSE6050</label>
+                    <p>Check your course</p><br>
+                    <div class="score_radio">
+                        <label><input type="radio" name="course" value="CSE322" checked />CSE322</label>&emsp;
+                        <label><input type="radio" name="course" value="CSE326">CSE326</option></label>&emsp;
+                        <label><input type="radio" name="course" value="CSE870">CSE870</label>&emsp;
+                    </div>
                     <p>Writing your Student ID</p><br>
                     <div class="studentid_input">
                         <input type="text" name="studentid" required>
@@ -53,14 +48,17 @@
         </div>
     </div>
 
-
-
-
-    <%if(alert){ %>
-    <div>
-        <span>학번이 잘못 되었습니다.</span>
-    </div>
-    <% } %>
+    <script type="text/javascript">
+        if (<%- JSON.stringify(alert) %>) {
+            if (<%- JSON.stringify(alert) %> == '1') {
+                alert("본인 학번을 입력하십시오!");
+            } else if (<%- JSON.stringify(alert) %>  == '2') {
+                alert("해당 학번이 수업에 없습니다. 다시 입력해주세요");
+            } else if (<%- JSON.stringify(alert) %>  == '3') {
+                alert("수업의 성적이 아직 업로드 되지 않았어요.");
+            }
+        }
+    </script>
 
     <% if(results){ %>
     <div class="score_btn">
