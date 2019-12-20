@@ -607,10 +607,14 @@ section {
 
 .id_wrap p{
     text-align: center;
-    margin: 20%;
+    margin-top: 9%;
+    margin-bottom: 5%;
     padding: 3%;
     padding-bottom: 10px;
     font-size: 25px;
+}
+.score_radio{
+    text-align: center;
 }
 
 .id_wrap form input[type=text]{
